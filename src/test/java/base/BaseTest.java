@@ -15,7 +15,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/");
         driver.manage().window().maximize();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
     }
 
     @AfterClass
