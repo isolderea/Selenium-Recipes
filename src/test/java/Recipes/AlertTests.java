@@ -18,20 +18,20 @@ public class AlertTests extends BaseTest {
     driver.get("https://formy-project.herokuapp.com/switch-window");
 
     //Identify our WebElements
-        WebElement alertButton = driver.findElement(By.id("alert-button"));
-        WebElement windowButton = driver.findElement(By.id("new-tab-button"));
+    WebElement alertButton = driver.findElement(By.id("alert-button"));
+    WebElement windowButton = driver.findElement(By.id("new-tab-button"));
 
     // Click on the button to show the Alert
-        alertButton.click();
+    alertButton.click();
     //Identify that there is an Alert
-        Alert alert = driver.switchTo().alert();
+    Alert alert = driver.switchTo().alert();
     //Get and check the text from the Alert
-        String textAlert = alert.getText();
-        System.out.println("Text from the Alert is :" + textAlert);
+    String textAlert = alert.getText();
+    System.out.println("Text from the Alert is :" + textAlert);
 
-        assertEquals(textAlert,"This is a test alert!");
+    assertEquals(textAlert,"This is a test alert!");
     //Close the Alert
-        alert.accept();
-        windowButton.click();
+    alert.accept();
+    windowButton.click();
     }
 }
