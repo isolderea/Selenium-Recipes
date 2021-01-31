@@ -2,27 +2,29 @@ package Recipes;
 
 import base.BaseTest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class DragAndDropTest extends BaseTest {
 
     @Test
-    public void dragAndDropTest() {
-    //THIS IS NOT WORKING YET
+    public void dragAndDropTest() throws IOException {
+
         //navigate to the Page
         driver.get("https://the-internet.herokuapp.com/drag_and_drop");
 
         //Find the elements
-        WebElement sourceObj = driver.findElement(By.id("column-a"));
-        WebElement destinationObj = driver.findElement(By.id("column-b"));
+        WebElement sourceObj = driver.findElement(By.cssSelector("#column-a"));
+        WebElement destinationObj = driver.findElement(By.cssSelector("#column-b"));
 
         /* Do the action. */
-        dragIT(sourceObj,destinationObj);
+        dragIT("#column-a","#column-b");
 
         /* Verify the drag and drop action success. */
         String dropStatusText = destinationObj.getText();
@@ -31,22 +33,24 @@ public class DragAndDropTest extends BaseTest {
 
 
     /* This method implement the drag and drop action use selenium webdriver. */
-    public void dragIT (WebElement From, WebElement To){
+    // The strings need to be CSS Locations
+    public void dragIT (String Fromlocator, String ToLocator) throws IOException {
         System.out.println("drag and drop started");
 
-        int x = To.getLocation().x;
-        int y = To.getLocation().y;
+        String filePath = "resources/drag_and_drop.js";
+        StringBuffer buffer = new StringBuffer();
 
-        Actions actions = new Actions(driver);
-        actions.moveToElement(From)
-                .pause(Duration.ofSeconds(1))
-                .clickAndHold(From)
-                .pause(Duration.ofSeconds(1))
-                .moveByOffset(x, y)
-                .moveToElement(To)
-                .moveByOffset(x,y)
-                .pause(Duration.ofSeconds(1))
-                .release().build().perform();
+        String line;
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        while((line = br.readLine())!=null)
+            buffer.append(line);
+
+        String javaScript = buffer.toString();
+        //Command to execute
+        String commandToExecute =  "$('"+Fromlocator+"').simulateDragDrop({ dropTarget: '"+ToLocator+"'});";
+
+        javaScript = javaScript + commandToExecute;
+        ((JavascriptExecutor)driver).executeScript(javaScript);
 
         System.out.println("drag and drop ended");
 
