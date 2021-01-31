@@ -13,7 +13,7 @@ public class BaseTest {
     protected WebDriver driver;
     @BeforeClass
     public void setUp() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "resources/chromedriver88.exe");
         driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/");
         driver.manage().window().maximize();
