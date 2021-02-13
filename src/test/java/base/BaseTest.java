@@ -14,11 +14,14 @@ public class BaseTest {
     @BeforeClass
     public void setUp() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver88.exe");
+
         driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/");
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         //Thread.sleep(5000);
+
     }
 
     @AfterClass
