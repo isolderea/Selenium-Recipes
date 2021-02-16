@@ -18,7 +18,9 @@ public class ButtonsTests extends BaseTest {
         //Finding the buttons
         WebElement successButton = driver.findElement(By.cssSelector(".btn.btn-lg.btn-success"));
         WebElement linkButton = driver.findElement(By.cssSelector(".btn.btn-lg.btn-link"));
-        WebElement dropdownButton = driver.findElement(By.id("btnGroupDrop1"));
+
+        WebElement dropdownButton = driver.findElement(By.id("datepicker"));
+        WebElement dropdownButto2n = driver.findElement(By.cssSelector("#datepicker"));
 
         //Click the button
         dropdownButton.click();
