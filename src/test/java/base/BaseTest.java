@@ -19,7 +19,11 @@ public class BaseTest {
         driver.get("https://formy-project.herokuapp.com/");
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+
+        //Implicit wait setup
+        //driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         //Thread.sleep(5000);
 
     }
