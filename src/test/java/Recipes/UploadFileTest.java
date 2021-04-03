@@ -9,7 +9,6 @@ import java.io.File;
 
 public class UploadFileTest extends BaseTest {
 
-
     @Test
     public void testSimpleAlert() {
 

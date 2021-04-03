@@ -1,5 +1,6 @@
 package base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -10,12 +11,15 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    public WebDriver driver;
+
     @BeforeClass
     public void setUp() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver88.exe");
 
-        driver = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", "resources/chromedriver88.exe");
+        WebDriverManager.chromedriver().setup();
+        this.driver = new ChromeDriver();
+
         driver.get("https://formy-project.herokuapp.com/");
 
         driver.manage().window().maximize();
@@ -30,6 +34,6 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown(){
-        driver.quit();
+        this.driver.quit();
     }
 }
